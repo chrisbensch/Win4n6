@@ -4,10 +4,10 @@
 # into your default drive's root directory.
 
 $packages = @(
-    "notepadplusplus.install"
-    "peazip.install"
+    #"notepadplusplus.install"
+    #"peazip.install"
     "autopsy"
-    "clamwin"
+    #"clamwin"
     "git"
     "nirlauncher"
     "python2"
@@ -34,11 +34,17 @@ $packages = @(
     "pebear.flare"
     "upx"
     "volatility.flare"
+    "network-miner"
+    "forensic7z"
+    "netfoxdetective"
+    "ericzimmermantools"
+
 )
 
 echo "Setting up Chocolatey software package manager"
 Get-PackageProvider -Name chocolatey -Force
 
+# Error here on line 45
 echo "Setting up Full Chocolatey Install"
 Install-Package -Name Chocolatey -Force -ProviderName chocolatey
 $chocopath = (Get-Package chocolatey | ?{$_.Name -eq "chocolatey"} | Select @{N="Source";E={((($a=($_.Source -split "\\"))[0..($a.length - 2)]) -join "\"),"Tools\chocolateyInstall" -join "\"}} | Select -ExpandProperty Source)
@@ -53,3 +59,16 @@ iex "refreshenv"
 
 echo "Installing Packages"
 $packages | %{choco install $_ --force -y}
+
+
+#  upgrade pip
+#  c:\python39\python.exe -m pip install --upgrade pip
+#  iex "c:\python39\python.exe -m pip install --upgrade pip"
+#  iex "pip install volatility3"
+#  download symbols for v3
+#  wget "https://downloads.volatilityfoundation.org/volatility3/symbols/windows.zip" -OutFile "C:\Python39\Lib\site-packages\volatility3\symbols\windows.zip"
+#  wget "https://downloads.volatilityfoundation.org/volatility3/symbols/linux.zip" -OutFile "C:\Python39\Lib\site-packages\volatility3\symbols\linux.zip"
+#  wget "https://downloads.volatilityfoundation.org/volatility3/symbols/mac.zip" -OutFile "C:\Python39\Lib\site-packages\volatility3\symbols\mac.zip"
+#  unzip
+
+
