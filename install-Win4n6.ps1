@@ -34,8 +34,6 @@ $packages = @(
     "pebear.flare"
     "upx"
     "volatility.flare"
-
-
 )
 
 echo "Setting up Chocolatey software package manager"
