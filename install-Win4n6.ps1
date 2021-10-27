@@ -41,21 +41,21 @@ $packages = @(
 
 )
 
-echo "Setting up Chocolatey software package manager"
-Get-PackageProvider -Name chocolatey
-
-# Error here on line 45
-echo "Setting up Full Chocolatey Install"
-Install-Package -Name Chocolatey -ProviderName chocolatey
-$chocopath = (Get-Package chocolatey | ?{$_.Name -eq "chocolatey"} | Select @{N="Source";E={((($a=($_.Source -split "\\"))[0..($a.length - 2)]) -join "\"),"Tools\chocolateyInstall" -join "\"}} | Select -ExpandProperty Source)
-& $chocopath "upgrade all -y"
-choco install chocolatey-core.extension
-
-echo "Setting up FireEye Flare Feed"
-$fireeyeFeed = "https://www.myget.org/F/fireeye/api/v2"
-iex "choco sources add -n=fireeye -s $fireeyeFeed --priority 1"
-iex "choco upgrade -y vcredist-all.flare"
-iex "refreshenv"
+#echo "Setting up Chocolatey software package manager"
+#Get-PackageProvider -Name chocolatey
+#
+## Error here on line 45
+#echo "Setting up Full Chocolatey Install"
+#Install-Package -Name Chocolatey -ProviderName chocolatey
+#$chocopath = (Get-Package chocolatey | ?{$_.Name -eq "chocolatey"} | Select @{N="Source";E={((($a=($_.#Source -split "\\"))[0..($a.length - 2)]) -join "\"),"Tools\chocolateyInstall" -join "\"}} | Select #-ExpandProperty Source)
+#& $chocopath "upgrade all -y"
+#choco install chocolatey-core.extension
+#
+#echo "Setting up FireEye Flare Feed"
+#$fireeyeFeed = "https://www.myget.org/F/fireeye/api/v2"
+#iex "choco sources add -n=fireeye -s $fireeyeFeed --priority 1"
+#iex "choco upgrade -y vcredist-all.flare"
+#iex "refreshenv"
 
 echo "Installing Packages"
 $packages | %{choco install $_ -y}
